@@ -1,0 +1,33 @@
+from setuptools import find_packages, setup
+
+setup(
+    name="genpy-stubgen",
+    version="0.0.1",
+    packages=find_packages(exclude=["tests"]),
+    description="A Python stub generator from genmsg specs",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+    author="Yuki Igarashi, Tamamki Nishino",
+    author_email="me@bonprosoft.com, otamachan@gmail.com",
+    install_requires=[
+        "genmsg",
+        "genpy",
+    ],
+    extras_require={
+        "dev": [
+            # NOTE: pytest>=5.0 doesn't support py2
+            "pytest>=4.6,<5.0",
+            "typing; python_version=='2.7'",
+        ],
+        # NOTE: We don't support python2 for the lint environment
+        "lint": [
+            "black==20.8b1",
+            "flake8-bugbear==21.4.3",
+            "flake8==3.9.1",
+            "isort==5.1.4",
+            "mypy==0.790",
+            "pysen>=0.9,<0.10",
+        ],
+    },
+    entry_points={"console_scripts": ["genpy_stubgen=genpy_stubgen.cli:cli"]},
+)
