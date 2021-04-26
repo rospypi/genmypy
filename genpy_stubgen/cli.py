@@ -20,7 +20,6 @@ def run_message_stubgen(
     package_files,  # type: List[str]
     outdir,  # type: Optional[str]
     search_paths,  # type: Dict[str, List[str]]
-    no_initpyi=False,  # type: bool
 ):
     # type: (...) -> None
     msg_context = MsgContext.create_default()
@@ -41,16 +40,12 @@ def run_message_stubgen(
             search_paths,
         )
 
-        if not no_initpyi:
-            generator.generate_pyi(output_dir)
-
 
 def run_service_stubgen(
     package,  # type: str
     package_files,  # type: List[str]
     outdir,  # type: Optional[str]
     search_paths,  # type: Dict[str, List[str]]
-    no_initpyi=False,  # type: bool
 ):
     # type: (...) -> None
     msg_context = MsgContext.create_default()
@@ -70,9 +65,6 @@ def run_service_stubgen(
             output_dir,
             search_paths,
         )
-
-        if not no_initpyi:
-            generator.generate_pyi(output_dir)
 
 
 _FileKindMapping = {
@@ -126,11 +118,6 @@ $ {0} srv nav_msgs --out-dir out \\
         type=str,
         action="append",
         help="Include paths for processing given files",
-    )
-    parser.add_argument(
-        "--no-init-pyi",
-        action="store_true",
-        help="Do not generate `__init__.pyi` file along with generated stub files",
     )
     args = parser.parse_args()
 
