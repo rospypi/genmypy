@@ -85,15 +85,14 @@ class ImportsElement(StatementElementBase):
         for line in from_imports:
             yield line
 
-        yield ""
+        if len(self._system_modules) > 0:
+            yield ""
 
         imports, from_imports = _generate_imports(self._third_party_modules, indent)
         for line in imports:
             yield line
         for line in from_imports:
             yield line
-
-        yield ""
 
 
 class EmptyLinesElement(StatementElementBase):

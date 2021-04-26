@@ -16,7 +16,7 @@ from .stub_element import (
 )
 
 if TYPE_CHECKING:
-    from typing import Dict, List, Tuple
+    from typing import Dict, List, Sequence, Tuple
 
 
 _GENMSG_PRIMITIVES = {
@@ -200,3 +200,12 @@ def convert_service_class(spec):
     srvclass.add(FieldElement("_response_class", "str"))
 
     return srvclass
+
+
+def convert_genpy_init(modules):
+    # type: (Sequence[str]) -> ImportsElement
+    imports = ImportsElement()
+    for m in modules:
+        imports.add_third_party_module("._{}".format(m), "*")
+
+    return imports
