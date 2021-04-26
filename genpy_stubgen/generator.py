@@ -16,6 +16,7 @@ if TYPE_CHECKING:
     SpecType = TypeVar("SpecType", MsgSpec, SrvSpec)
     LoaderType = Callable[[MsgContext, str, str], SpecType]
     GeneratorType = Callable[[str, SpecType], Iterator[str]]
+    ModuleFinderType = Callable[[str], Iterator[str]]
 
 
 GENMSG_EXT_LENGTH = len(genmsg.EXT_MSG)
@@ -104,7 +105,7 @@ def _load_spec(
     return spec
 
 
-def _find_all_genmsg_modules(package_dir):
+def _find_all_genpy_modules_genmsg(package_dir):
     # type: (str) -> Iterator[str]
     for path in os.listdir(package_dir):
         if not os.path.isfile(os.path.join(package_dir, path)):
@@ -112,6 +113,16 @@ def _find_all_genmsg_modules(package_dir):
 
         if path.endswith(genmsg.EXT_MSG) or path.endswith(genmsg.EXT_SRV):
             yield path[:-GENMSG_EXT_LENGTH]
+
+
+def _find_all_genpy_modules_py(package_dir):
+    # type: (str) -> Iterator[str]
+    for path in os.listdir(package_dir):
+        if path == "__init__.py" or not os.path.isfile(os.path.join(package_dir, path)):
+            continue
+
+        if path.startswith("_") and path.endswith(".py"):
+            yield path[1:-3]
 
 
 def generate_stub(
@@ -135,9 +146,18 @@ def generate_stub(
     return outpath
 
 
-def generate_module_stub(package_dir, outdir):
-    # type: (str, str) -> str
-    genmsg_modules = sorted(_find_all_genmsg_modules(package_dir))
+GenPyModuleFinders = {
+    "py": _find_all_genpy_modules_py,
+    "genmsg": _find_all_genpy_modules_genmsg,
+}  # type: Dict[str, ModuleFinderType]
+
+
+def generate_module_stub(package_dir, outdir, module_finder):
+    # type: (str, str, str) -> str
+    module_finder_impl = GenPyModuleFinders.get(module_finder)
+    if module_finder_impl is None:
+        raise ValueError("Unknown module finder: {}".format(module_finder))
+    genmsg_modules = sorted(module_finder_impl(package_dir))
     imports = convert_genpy_init(genmsg_modules)
 
     _make_dirs(outdir)

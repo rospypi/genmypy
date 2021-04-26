@@ -69,9 +69,10 @@ def run_service_stubgen(
 def run_module_stubgen(
     package_dir,  # type: str
     outdir,  # type: str
+    module_finder,  # type: str
 ):
     # type: (...) -> None
-    generator.generate_module_stub(package_dir, outdir)
+    generator.generate_module_stub(package_dir, outdir, module_finder)
 
 
 def _start_msg_srv(args):
@@ -89,7 +90,7 @@ def _start_module(args):
     if out_dir is None:
         out_dir = package_dir
 
-    run_module_stubgen(package_dir, out_dir)
+    run_module_stubgen(package_dir, out_dir, args.module_finder)
 
 
 def _setup_module_options(parser):
@@ -98,6 +99,17 @@ def _setup_module_options(parser):
         "package_dir",
         type=str,
         help="Package directory to create __init__.pyi",
+    )
+    parser.add_argument(
+        "--module-finder",
+        type=str,
+        choices=generator.GenPyModuleFinders.keys(),
+        help=(
+            "Method to find generated messages/services. "
+            "(genmsg: Files with .msg, .srv would be regarded as modules. "
+            "py: Python files starting with `_` would be regarded as modules.)"
+        ),
+        default="genmsg",
     )
     parser.add_argument(
         "--out-dir",
