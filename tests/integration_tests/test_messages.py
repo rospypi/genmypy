@@ -21,12 +21,11 @@ def test_std_msgs(expected_dir, std_msgs_path):
     expected_dir = os.path.join(expected_dir, package, "msg")
 
     with tempfile.TemporaryDirectory() as td:
-        run_message_stubgen(package, package_files, td, search_paths, False)
+        run_message_stubgen(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_Duration.pyi")
         assert_output_equals(expected_dir, td, "_Header.pyi")
         assert_output_equals(expected_dir, td, "_Time.pyi")
-        assert_output_equals(expected_dir, td, "__init__.pyi")
 
 
 def test_sensor_msgs(expected_dir, std_msgs_path, sensor_msgs_path):
@@ -44,9 +43,8 @@ def test_sensor_msgs(expected_dir, std_msgs_path, sensor_msgs_path):
     expected_dir = os.path.join(expected_dir, package, "msg")
 
     with tempfile.TemporaryDirectory() as td:
-        run_message_stubgen(package, package_files, td, search_paths, True)
+        run_message_stubgen(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_JoyFeedback.pyi")
         assert_output_equals(expected_dir, td, "_PointCloud2.pyi")
         assert_output_equals(expected_dir, td, "_Image.pyi")
-        assert not os.path.exists(os.path.join(td, "__init__.pyi"))

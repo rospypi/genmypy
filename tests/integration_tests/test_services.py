@@ -20,10 +20,9 @@ def test_sensor_msgs(expected_dir, std_msgs_path, sensor_msgs_path):
     expected_dir = os.path.join(expected_dir, package, "srv")
 
     with tempfile.TemporaryDirectory() as td:
-        run_service_stubgen(package, package_files, td, search_paths, False)
+        run_service_stubgen(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_SetCameraInfo.pyi")
-        assert_output_equals(expected_dir, td, "__init__.pyi")
 
 
 def test_nav_msgs(
@@ -43,7 +42,6 @@ def test_nav_msgs(
     expected_dir = os.path.join(expected_dir, package, "srv")
 
     with tempfile.TemporaryDirectory() as td:
-        run_service_stubgen(package, package_files, td, search_paths, True)
+        run_service_stubgen(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_SetMap.pyi")
-        assert not os.path.exists(os.path.join(td, "__init__.pyi"))

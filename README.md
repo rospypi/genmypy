@@ -14,9 +14,7 @@ pip install genpy-stubgen
 
 ```
 $ genpy_stubgen --help
-Usage: genpy_stubgen [-h] [--out-dir OUT_DIR]
-                     [--include-path [INCLUDE_PATH [INCLUDE_PATH ...]]]
-                     [--no-init-pyi]
+Usage: genpy_stubgen [-h] [--out-dir OUT_DIR] [--include-path INCLUDE_PATH]
                      {srv,msg} package files [files ...]
 
 positional arguments:
@@ -29,10 +27,8 @@ optional arguments:
   --out-dir OUT_DIR     Output directory.If the option is unset, each stub
                         file will be generated in the same directory as each
                         input.
-  --include-path [INCLUDE_PATH [INCLUDE_PATH ...]], -I [INCLUDE_PATH [INCLUDE_PATH ...]]
+  --include-path INCLUDE_PATH, -I INCLUDE_PATH
                         Include paths for processing given files
-  --no-init-pyi         Do not generate `__init__.pyi` file along with
-                        generated stub files
 ```
 
 Examples:

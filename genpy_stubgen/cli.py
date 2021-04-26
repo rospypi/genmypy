@@ -10,9 +10,7 @@ from ._typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Callable, Dict, List, Optional
 
-    CliHandler = Callable[
-        [str, List[str], Optional[str], Dict[str, List[str]], bool], None
-    ]
+    CliHandler = Callable[[str, List[str], Optional[str], Dict[str, List[str]]], None]
 
 
 def run_message_stubgen(
@@ -20,7 +18,6 @@ def run_message_stubgen(
     package_files,  # type: List[str]
     outdir,  # type: Optional[str]
     search_paths,  # type: Dict[str, List[str]]
-    no_initpyi=False,  # type: bool
 ):
     # type: (...) -> None
     msg_context = MsgContext.create_default()
@@ -41,16 +38,12 @@ def run_message_stubgen(
             search_paths,
         )
 
-        if not no_initpyi:
-            generator.generate_pyi(output_dir)
-
 
 def run_service_stubgen(
     package,  # type: str
     package_files,  # type: List[str]
     outdir,  # type: Optional[str]
     search_paths,  # type: Dict[str, List[str]]
-    no_initpyi=False,  # type: bool
 ):
     # type: (...) -> None
     msg_context = MsgContext.create_default()
@@ -70,9 +63,6 @@ def run_service_stubgen(
             output_dir,
             search_paths,
         )
-
-        if not no_initpyi:
-            generator.generate_pyi(output_dir)
 
 
 _FileKindMapping = {
@@ -127,15 +117,10 @@ $ {0} srv nav_msgs --out-dir out \\
         action="append",
         help="Include paths for processing given files",
     )
-    parser.add_argument(
-        "--no-init-pyi",
-        action="store_true",
-        help="Do not generate `__init__.pyi` file along with generated stub files",
-    )
     args = parser.parse_args()
 
     func = _FileKindMapping[args.file_kind]
     search_paths = command_line.includepath_to_dict(
         args.include_path
     )  # type: Dict[str, List[str]]
-    func(args.package, args.files, args.out_dir, search_paths, args.no_init_pyi)
+    func(args.package, args.files, args.out_dir, search_paths)
