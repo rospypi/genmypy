@@ -10,9 +10,7 @@ from ._typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Callable, Dict, List, Optional
 
-    CliHandler = Callable[
-        [str, List[str], Optional[str], Dict[str, List[str]], bool], None
-    ]
+    CliHandler = Callable[[str, List[str], Optional[str], Dict[str, List[str]]], None]
 
 
 def run_message_stubgen(
@@ -125,4 +123,4 @@ $ {0} srv nav_msgs --out-dir out \\
     search_paths = command_line.includepath_to_dict(
         args.include_path
     )  # type: Dict[str, List[str]]
-    func(args.package, args.files, args.out_dir, search_paths, args.no_init_pyi)
+    func(args.package, args.files, args.out_dir, search_paths)
