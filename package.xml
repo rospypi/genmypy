@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model
+  href="http://download.ros.org/schema/package_format3.xsd"
+  schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>genpy_stubgen</name>
+  <version>0.0.1</version>
+  <description>
+    Python stub generator from genmsg specs
+  </description>
+  <maintainer email="me@bonprosoft.com">Yuki Igarashi</maintainer>
+  <maintainer email="otamachan@gmail.com">Tamaki Nishino</maintainer>
+  <license>Apache</license>
+
+  <url type="website">https://github.com/rospypi/genpy_stubgen</url>
+  <url type="bugtracker">https://github.com/rospypi/genpy_stubgen/issues</url>
+  <url type="repository">https://github.com/rospypi/genpy_stubgen</url>
+
+  <author>Yuki Igarashi</author>
+  <author>Tamaki Nishino</author>
+
+  <depend>genmsg</depend>
+  <depend>genpy</depend>
+
+  <buildtool_depend version_gte="0.5.74">catkin</buildtool_depend>
+  <buildtool_depend condition="$ROS_PYTHON_VERSION == 2">python-setuptools</buildtool_depend>
+  <buildtool_depend condition="$ROS_PYTHON_VERSION == 3">python3-setuptools</buildtool_depend>
+
+  <export>
+    <message_generator>py_stubgen</message_generator>
+    <architecture_independent/>
+  </export>
+</package>
