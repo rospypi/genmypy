@@ -6,9 +6,8 @@ import genmsg.msgs
 from genmsg import MsgContext, MsgSpec, SrvSpec, gentools
 from genpy.generator import compute_outfile_name, make_python_safe
 
-from ._compat import lru_cache
 from ._typing import TYPE_CHECKING
-from .converter import convert_message_class, convert_service_class
+from .converter import convert_genpy_init, convert_message_class, convert_service_class
 from .stub_element import ClassElement, EmptyLinesElement, ImportsElement, ModuleElement
 
 if TYPE_CHECKING:
@@ -19,6 +18,9 @@ if TYPE_CHECKING:
     GeneratorType = Callable[[str, SpecType], Iterator[str]]
 
 
+GENMSG_EXT_LENGTH = len(genmsg.EXT_MSG)
+
+
 def generate_message_stub(package, spec):
     # type: (str, MsgSpec) -> Iterator[str]
     pyspec = make_python_safe(spec)
@@ -27,6 +29,7 @@ def generate_message_stub(package, spec):
 
     module = ModuleElement()
     module.add_element(imports)
+    module.add_element(EmptyLinesElement())
     module.add_element(genclass)
 
     for line in module.generate():
@@ -44,6 +47,7 @@ def generate_service_stub(package, spec):
 
     module = ModuleElement()
     module.add_element(imports)
+    module.add_element(EmptyLinesElement())
     module.add_element(message_classes[0])  # request class
     module.add_element(EmptyLinesElement())
     module.add_element(message_classes[1])  # response class
@@ -100,6 +104,16 @@ def _load_spec(
     return spec
 
 
+def _find_all_genmsg_modules(package_dir):
+    # type: (str) -> Iterator[str]
+    for path in os.listdir(package_dir):
+        if not os.path.isfile(os.path.join(package_dir, path)):
+            continue
+
+        if path.endswith(genmsg.EXT_MSG) or path.endswith(genmsg.EXT_SRV):
+            yield path[:-GENMSG_EXT_LENGTH]
+
+
 def generate_stub(
     msg_context,  # type: MsgContext
     loader,  # type: LoaderType[SpecType]
@@ -121,14 +135,15 @@ def generate_stub(
     return outpath
 
 
-@lru_cache()
-def generate_pyi(outdir):
-    # type: (str) -> None
-    """Generate `__init__.pyi` to the given directory.
+def generate_module_stub(package_dir, outdir):
+    # type: (str, str) -> str
+    genmsg_modules = sorted(_find_all_genmsg_modules(package_dir))
+    imports = convert_genpy_init(genmsg_modules)
 
-    .. warning::
-        Make sure that `outdir` exists before calling this function.
-    """
-    path = os.path.join(outdir, "__init__.pyi")
-    with open(path, "w"):
-        pass
+    _make_dirs(outdir)
+    outpath = os.path.join(outdir, "__init__.pyi")
+    with open(outpath, "w") as f:
+        for line in imports.generate(0):
+            f.write("{}\n".format(line))
+
+    return outpath

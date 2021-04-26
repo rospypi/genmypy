@@ -1,6 +1,5 @@
 import argparse
 import os
-import sys
 
 from genmsg import MsgContext, command_line, msg_loader
 
@@ -10,7 +9,9 @@ from ._typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Callable, Dict, List, Optional
 
-    CliHandler = Callable[[str, List[str], Optional[str], Dict[str, List[str]]], None]
+    SrvMsgCallback = Callable[
+        [str, List[str], Optional[str], Dict[str, List[str]]], None
+    ]
 
 
 def run_message_stubgen(
@@ -65,10 +66,75 @@ def run_service_stubgen(
         )
 
 
-_FileKindMapping = {
-    "srv": run_service_stubgen,
-    "msg": run_message_stubgen,
-}  # type: Dict[str, CliHandler]
+def run_module_stubgen(
+    package_dir,  # type: str
+    outdir,  # type: str
+):
+    # type: (...) -> None
+    generator.generate_module_stub(package_dir, outdir)
+
+
+def _start_msg_srv(args):
+    # type: (argparse.Namespace) -> None
+    search_paths = command_line.includepath_to_dict(
+        args.include_path
+    )  # type: Dict[str, List[str]]
+    args.handler(args.package, args.files, args.out_dir, search_paths)
+
+
+def _start_module(args):
+    # type: (argparse.Namespace) -> None
+    package_dir = args.package_dir
+    out_dir = args.out_dir
+    if out_dir is None:
+        out_dir = package_dir
+
+    run_module_stubgen(package_dir, out_dir)
+
+
+def _setup_module_options(parser):
+    # type: (argparse.ArgumentParser) -> None
+    parser.add_argument(
+        "package_dir",
+        type=str,
+        help="Package directory to create __init__.pyi",
+    )
+    parser.add_argument(
+        "--out-dir",
+        type=str,
+        help=(
+            "Output directory. "
+            "If the option is unset, __init__.pyi will be generated in the same "
+            "directory as package_dir."
+        ),
+    )
+    parser.set_defaults(func=_start_module)
+
+
+def _setup_msg_srv_options(parser, handler):
+    # type: (argparse.ArgumentParser, SrvMsgCallback) -> None
+    parser.add_argument(
+        "package", type=str, help="Package name of given files", default="out"
+    )
+    parser.add_argument("files", type=str, help="Files to generate stubs", nargs="+")
+    parser.add_argument(
+        "--out-dir",
+        type=str,
+        help=(
+            "Output directory. "
+            "If the option is unset, each stub file will be generated in the same "
+            "directory as each input."
+        ),
+    )
+    parser.add_argument(
+        "--include-path",
+        "-I",
+        type=str,
+        action="append",
+        help="Include paths for processing given files",
+    )
+    parser.set_defaults(func=_start_msg_srv)
+    parser.set_defaults(handler=handler)
 
 
 def cli():
@@ -94,33 +160,19 @@ $ {0} srv nav_msgs --out-dir out \\
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
-    parser.add_argument(
-        "file_kind", help="Type of given files", choices=_FileKindMapping.keys()
+    subparser = parser.add_subparsers()
+    _setup_msg_srv_options(
+        subparser.add_parser("msg", help="Generate stub files from .msg files"),
+        run_service_stubgen,
     )
-    parser.add_argument(
-        "package", type=str, help="Package name of given files", default="out"
+    _setup_msg_srv_options(
+        subparser.add_parser("srv", help="Generate stub files from .srv files"),
+        run_message_stubgen,
     )
-    parser.add_argument("files", type=str, help="Files to generate stubs", nargs="+")
-    parser.add_argument(
-        "--out-dir",
-        type=str,
-        help=(
-            "Output directory."
-            "If the option is unset, each stub file will be generated in the same "
-            "directory as each input."
-        ),
-    )
-    parser.add_argument(
-        "--include-path",
-        "-I",
-        type=str,
-        action="append",
-        help="Include paths for processing given files",
+    _setup_module_options(
+        subparser.add_parser(
+            "module", help="Generate __init__.pyi from a msg/srv directory"
+        )
     )
     args = parser.parse_args()
-
-    func = _FileKindMapping[args.file_kind]
-    search_paths = command_line.includepath_to_dict(
-        args.include_path
-    )  # type: Dict[str, List[str]]
-    func(args.package, args.files, args.out_dir, search_paths)
+    args.func(args)
