@@ -7,7 +7,7 @@ from genmsg import MsgContext, MsgSpec, SrvSpec, gentools
 from genpy.generator import compute_outfile_name, make_python_safe
 
 from ._typing import TYPE_CHECKING
-from .converter import convert_message_class, convert_service_class, convert_genpy_init
+from .converter import convert_genpy_init, convert_message_class, convert_service_class
 from .stub_element import ClassElement, EmptyLinesElement, ImportsElement, ModuleElement
 
 if TYPE_CHECKING:
