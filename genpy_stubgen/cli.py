@@ -163,11 +163,11 @@ $ {0} srv nav_msgs --out-dir out \\
     subparser = parser.add_subparsers()
     _setup_msg_srv_options(
         subparser.add_parser("msg", help="Generate stub files from .msg files"),
-        run_service_stubgen,
+        run_message_stubgen,
     )
     _setup_msg_srv_options(
         subparser.add_parser("srv", help="Generate stub files from .srv files"),
-        run_message_stubgen,
+        run_service_stubgen,
     )
     _setup_module_options(
         subparser.add_parser(
