@@ -10,7 +10,7 @@
   </description>
   <maintainer email="me@bonprosoft.com">Yuki Igarashi</maintainer>
   <maintainer email="otamachan@gmail.com">Tamaki Nishino</maintainer>
-  <license>Apache</license>
+  <license>Apache License, Version 2.0</license>
 
   <url type="website">https://github.com/rospypi/genpyi</url>
   <url type="bugtracker">https://github.com/rospypi/genpyi/issues</url>

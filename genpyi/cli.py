@@ -158,7 +158,6 @@ def cli():
 
 Examples:
 $ {0} msg custom_msgs custom_msgs/msg/Custom.msg
-$ {0} msg std_msgs --out-dir out /opt/ros/melodic/share/std_msgs/msg/Header.msg
 $ {0} msg sensor_msgs --out-dir out \\
     -Istd_msgs:/opt/ros/melodic/share/std_msgs/msg \\
     -Isensor_msgs:/opt/ros/melodic/share/sensor_msgs/msg \\
@@ -167,7 +166,8 @@ $ {0} srv custom_msgs custom_msgs/srv/Custom.msg
 $ {0} srv nav_msgs --out-dir out \\
     -Istd_msgs:/opt/ros/melodic/share/std_msgs/msg \\
     -Isensor_msgs:/opt/ros/melodic/share/sensor_msgs/msg \\
-    /opt/ros/melodic/share/sensor_msgs/srv/SetCameraInfo.srv""".format(
+    /opt/ros/melodic/share/sensor_msgs/srv/SetCameraInfo.srv
+$ {0} module custom_msgs/msg/""".format(
             prog
         ),
         formatter_class=argparse.RawTextHelpFormatter,
