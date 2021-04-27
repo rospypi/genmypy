@@ -8,12 +8,10 @@ jobs:
       image: ros:melodic-ros-core
     steps:
     - uses: actions/checkout@v2
-    - name: Set up ROS
+    - name: Set up Python
       run: |
           apt -y update
           apt -y install python-pip
-    - name: Set up Python
-      run: |
           pip install tox==3.23.0
     - name: Run pytest
       run: |
@@ -22,12 +20,17 @@ jobs:
     name: py37
     runs-on: ubuntu-latest
     container:
-      image: python:3.7-buster
+      image: ros:melodic-ros-core
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python
       run: |
-          pip install tox==3.23.0
+          apt -y update
+          apt -y install \
+            python3-pip \
+            python3.7 \
+            python3.7-dev
+          pip3 install tox==3.23.0
     - name: Run pytest
       run: |
           tox -e py37
