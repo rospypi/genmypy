@@ -1,0 +1,33 @@
+name: Python tests
+on: [push]
+jobs:
+  py27:
+    name: py27
+    runs-on: ubuntu-latest
+    container:
+      image: ros:melodic-ros-core
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up ROS
+      run: |
+          apt -y update
+          apt -y install python-pip
+    - name: Set up Python
+      run: |
+          pip install tox==3.23.0
+    - name: Run pytest
+      run: |
+          tox -e py27
+  py37:
+    name: py37
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.7-buster
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      run: |
+          pip install tox==3.23.0
+    - name: Run pytest
+      run: |
+          tox -e py37
