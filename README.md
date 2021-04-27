@@ -70,8 +70,8 @@ $ genpyi module --module-finder py --out out \
 - `genpyi msg` / `genpyi srv`
   ```sh
   Usage: genpyi {msg,srv} [-h] [--out-dir OUT_DIR]
-                                 [--include-path INCLUDE_PATH]
-                                 package files [files ...]
+                               [--include-path INCLUDE_PATH]
+                               package files [files ...]
 
   positional arguments:
     package               Package name of given files
