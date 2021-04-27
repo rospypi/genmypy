@@ -1,6 +1,6 @@
 import collections
 
-from genpy_stubgen._typing import TYPE_CHECKING
+from ._typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing import DefaultDict, Iterator, List, Optional, Sequence, Set, Tuple

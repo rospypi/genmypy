@@ -2,7 +2,7 @@ import os
 import tempfile
 from typing import Dict, List
 
-from genpy_stubgen.cli import run_message_stubgen
+from genpyi.cli import run_message_stubgen
 
 from .utils import assert_output_equals, message_path
 

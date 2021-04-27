@@ -1,4 +1,4 @@
-from genpy_stubgen.cli import cli
+from genpyi.cli import cli
 
 
 if __name__ == "__main__":
