@@ -60,6 +60,11 @@ $ genpyi srv nav_msgs --out-dir out \
     -Istd_msgs:/opt/ros/melodic/share/std_msgs/msg \
     -Isensor_msgs:/opt/ros/melodic/share/sensor_msgs/msg \
     /opt/ros/melodic/share/sensor_msgs/srv/SetCameraInfo.srv
+
+# Module files
+$ genpyi module custom_msgs/msg
+$ genpyi module --module-finder py --out out \
+    /opt/ros/melodic/lib/python2.7/dist-packages/std_msgs/msg/
 ```
 
 - `genpyi msg` / `genpyi srv`
