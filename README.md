@@ -10,12 +10,30 @@ pip install genpy-stubgen
 
 ## Usage
 
+### catkin
+
+Add `genpyi` along with `message_generation` to `find_package` in CMakeLists.txt.
+`genmsg` will find `genpyi` automatically when building msg/srv files.
+
+Also, keep in mind that your package should have the build dependency for `genpyi` in `package.xml`
+to make sure that catkin finishes the build of `genpyi` before building your package.
+
+Examples:
+
+- CMakeLists.txt
+  ```cmake
+  find_package(catkin REQUIRED COMPONENTS std_msgs message_generation genpyi)
+  ```
+- package.xml
+  ```xml
+  <build_depend>genpyi</build_depend>
+  ```
+
 ### CLI
 
 ```
 $ genpy_stubgen --help
 Usage: genpy_stubgen [-h] {msg,srv,module} ...
-
 positional arguments:
   {msg,srv,module}
     msg             Generate stub files from .msg files
@@ -74,22 +92,3 @@ $ genpy_stubgen srv nav_msgs --out-dir out \
     --out-dir OUT_DIR  Output directory. If the option is unset, __init__.pyi
                        will be generated in the same directory as package_dir.
   ```
-
-### CMake
-
-**TODO**
-
-Call `generate_genpy_stub` along with `generate_messages` and `add_service_files`.
-
-Examples:
-```cmake
-generate_genpy_stub(
-  DEPENDENCIES
-  std_msgs
-  geometry_msgs
-  MESSAGES
-  Custom.msg
-  SERVICES
-  CustomService.srv
-)
-```
