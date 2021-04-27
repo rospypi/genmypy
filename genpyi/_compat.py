@@ -1,5 +1,4 @@
 import functools
-import sys
 
 from ._typing import TYPE_CHECKING
 
@@ -13,7 +12,7 @@ try:
 except ImportError:
     # Provide a simple cache for Python2
     def lru_cache():
-        # type: (...) -> Callable[..., TResult]
+        # type: (...) -> Callable[..., Callable[..., TResult]]
         def _lru_cache(func):
             # type: (Callable[..., TResult]) -> Callable[..., TResult]
             cache = {}  # type: Dict[Any, Any]

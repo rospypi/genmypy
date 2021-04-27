@@ -1,10 +1,9 @@
 import os
-import tempfile
 from typing import Dict, List
 
 from genpyi.cli import run_message_stubgen
 
-from .utils import assert_output_equals, message_path
+from .utils import assert_output_equals, message_path, temporary_directory
 
 
 def test_std_msgs(expected_dir, std_msgs_path):
@@ -20,7 +19,7 @@ def test_std_msgs(expected_dir, std_msgs_path):
     }  # type: Dict[str, List[str]]
     expected_dir = os.path.join(expected_dir, package, "msg")
 
-    with tempfile.TemporaryDirectory() as td:
+    with temporary_directory() as td:
         run_message_stubgen(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_Duration.pyi")
@@ -42,7 +41,7 @@ def test_sensor_msgs(expected_dir, std_msgs_path, sensor_msgs_path):
     }  # type: Dict[str, List[str]]
     expected_dir = os.path.join(expected_dir, package, "msg")
 
-    with tempfile.TemporaryDirectory() as td:
+    with temporary_directory() as td:
         run_message_stubgen(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_JoyFeedback.pyi")
