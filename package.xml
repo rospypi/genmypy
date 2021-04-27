@@ -12,9 +12,9 @@
   <maintainer email="otamachan@gmail.com">Tamaki Nishino</maintainer>
   <license>Apache</license>
 
-  <url type="website">https://github.com/rospypi/genpy_stubgen</url>
-  <url type="bugtracker">https://github.com/rospypi/genpy_stubgen/issues</url>
-  <url type="repository">https://github.com/rospypi/genpy_stubgen</url>
+  <url type="website">https://github.com/rospypi/genpyi</url>
+  <url type="bugtracker">https://github.com/rospypi/genpyi/issues</url>
+  <url type="repository">https://github.com/rospypi/genpyi</url>
 
   <author>Yuki Igarashi</author>
   <author>Tamaki Nishino</author>

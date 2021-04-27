@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="genpy-stubgen",
+    name="genpyi",
     version="0.0.1",
     packages=find_packages(exclude=["tests"]),
     description="A Python stub generator from genmsg specs",
@@ -29,5 +29,5 @@ setup(
             "pysen>=0.9,<0.10",
         ],
     },
-    entry_points={"console_scripts": ["genpy_stubgen=genpy_stubgen.cli:cli"]},
+    entry_points={"console_scripts": ["genpyi=genpyi.cli:cli"]},
 )
