@@ -1,5 +1,8 @@
 name: Python tests
 on: [push]
+env:
+  DEBIAN_FRONTEND: noninteractive
+  TOX_VERSION: 3.23.0
 jobs:
   py27:
     name: py27
@@ -8,11 +11,13 @@ jobs:
       image: ros:melodic-ros-core
     steps:
     - uses: actions/checkout@v2
+    - name: Set up apt
+      run: |
+          apt-get update -y
     - name: Set up Python
       run: |
-          apt -y update
-          apt -y install python-pip
-          pip install tox==3.23.0
+          apt-get install -y --no-install-recommends python-pip
+          pip install tox==${{ env.TOX_VERSION }}
     - name: Run pytest
       run: |
           tox -e py27
@@ -22,15 +27,25 @@ jobs:
     container:
       image: ros:melodic-ros-core
     steps:
+    - name: Set up apt
+      run: |
+          apt-get update -y
+          apt-get install -y --no-install-recommends software-properties-common
+    - name: Set up git
+      run: |
+          # In order to create a local git repository
+          # in actions/checkout@v2, git>=2.18 is required
+          add-apt-repository ppa:git-core/ppa
+          apt-get update -y
+          apt-get install -y --no-install-recommends git
     - uses: actions/checkout@v2
     - name: Set up Python
       run: |
-          apt -y update
-          apt -y install \
+          apt-get install -y --no-install-recommends \
             python3-pip \
             python3.7 \
             python3.7-dev
-          pip3 install tox==3.23.0
+          pip3 install tox==${{ env.TOX_VERSION }}
     - name: Run pytest
       run: |
           tox -e py37

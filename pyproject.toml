@@ -10,6 +10,6 @@ mypy_preset = "strict"
 py_version = "py27"
 isort_known_first_party = ["genpyi"]
 [tool.pysen.lint.source]
-  excludes = ["tests/integration_tests/expected"]
+  excludes = ["tests/integration_tests/expected", ".tox"]
 [[tool.pysen.lint.mypy_targets]]
   paths = ["."]
