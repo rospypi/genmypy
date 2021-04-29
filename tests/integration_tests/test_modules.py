@@ -1,6 +1,6 @@
 import os
 
-from genpyi.cli import run_module_stubgen
+from genpyi import cli
 
 from .utils import assert_output_equals, message_path, service_path, temporary_directory
 
@@ -13,12 +13,12 @@ def test_std_msgs_msg(expected_dir, std_msgs_path, std_msgs_py_path):
     expected_dir = os.path.join(expected_dir, package, "msg")
 
     with temporary_directory() as td:
-        run_module_stubgen(package_dir, td, "genmsg")
+        cli.run_module(package_dir, td, "genmsg")
 
         assert_output_equals(expected_dir, td, "__init__.pyi")
 
     with temporary_directory() as td:
-        run_module_stubgen(package_py_dir, td, "py")
+        cli.run_module(package_py_dir, td, "py")
 
         assert_output_equals(expected_dir, td, "__init__.pyi")
 
@@ -33,11 +33,11 @@ def test_sensor_msgs_srv(
     expected_dir = os.path.join(expected_dir, package, "srv")
 
     with temporary_directory() as td:
-        run_module_stubgen(package_dir, td, "genmsg")
+        cli.run_module(package_dir, td, "genmsg")
 
         assert_output_equals(expected_dir, td, "__init__.pyi")
 
     with temporary_directory() as td:
-        run_module_stubgen(package_py_dir, td, "py")
+        cli.run_module(package_py_dir, td, "py")
 
         assert_output_equals(expected_dir, td, "__init__.pyi")
