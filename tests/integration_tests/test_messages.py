@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List
 
-from genpyi.cli import run_message_stubgen
+from genpyi import cli
 
 from .utils import assert_output_equals, message_path, temporary_directory
 
@@ -20,7 +20,7 @@ def test_std_msgs(expected_dir, std_msgs_path):
     expected_dir = os.path.join(expected_dir, package, "msg")
 
     with temporary_directory() as td:
-        run_message_stubgen(package, package_files, td, search_paths)
+        cli.run_message(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_Duration.pyi")
         assert_output_equals(expected_dir, td, "_Header.pyi")
@@ -42,7 +42,7 @@ def test_sensor_msgs(expected_dir, std_msgs_path, sensor_msgs_path):
     expected_dir = os.path.join(expected_dir, package, "msg")
 
     with temporary_directory() as td:
-        run_message_stubgen(package, package_files, td, search_paths)
+        cli.run_message(package, package_files, td, search_paths)
 
         assert_output_equals(expected_dir, td, "_JoyFeedback.pyi")
         assert_output_equals(expected_dir, td, "_PointCloud2.pyi")

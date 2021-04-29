@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     ]
 
 
-def run_message_stubgen(
+def run_message(
     package,  # type: str
     package_files,  # type: List[str]
     outdir,  # type: Optional[str]
@@ -40,7 +40,7 @@ def run_message_stubgen(
         )
 
 
-def run_service_stubgen(
+def run_service(
     package,  # type: str
     package_files,  # type: List[str]
     outdir,  # type: Optional[str]
@@ -66,7 +66,7 @@ def run_service_stubgen(
         )
 
 
-def run_module_stubgen(
+def run_module(
     package_dir,  # type: str
     outdir,  # type: str
     module_finder,  # type: str
@@ -90,7 +90,7 @@ def _start_module(args):
     if out_dir is None:
         out_dir = package_dir
 
-    run_module_stubgen(package_dir, out_dir, args.module_finder)
+    run_module(package_dir, out_dir, args.module_finder)
 
 
 def _setup_module_options(parser):
@@ -175,11 +175,11 @@ $ {0} module custom_msgs/msg/""".format(
     subparser = parser.add_subparsers()
     _setup_msg_srv_options(
         subparser.add_parser("msg", help="Generate stub files from .msg files"),
-        run_message_stubgen,
+        run_message,
     )
     _setup_msg_srv_options(
         subparser.add_parser("srv", help="Generate stub files from .srv files"),
-        run_service_stubgen,
+        run_service,
     )
     _setup_module_options(
         subparser.add_parser(
