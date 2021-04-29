@@ -45,4 +45,5 @@ setup(
         ],
     },
     entry_points={"console_scripts": ["genpyi=genpyi.cli:cli"]},
+    include_package_data=True,
 )
