@@ -5,8 +5,7 @@ setup(
     version="0.1.0",
     packages=find_packages(exclude=["tests"]),
     description="A Python stub generator from genmsg specs",
-    long_description=open("README.md").read(),
-    long_description_content_type="text/markdown",
+    long_description=open("README.rst").read(),
     author="Yuki Igarashi, Tamamki Nishino",
     author_email="me@bonprosoft.com, otamachan@gmail.com",
     classifiers=[
@@ -44,6 +43,6 @@ setup(
             "pysen>=0.9,<0.10",
         ],
     },
-    entry_points={"console_scripts": ["genpyi=genpyi.cli:cli"]},
-    include_package_data=True,
+    package_data={"genpyi": ["py.typed"]},
+    scripts=["scripts/genpyi"],
 )

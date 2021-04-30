@@ -6,7 +6,7 @@ set(GENPYI_DIR "@(CMAKE_CURRENT_SOURCE_DIR)/scripts")
 set(GENPYI_DIR "${genpyi_DIR}/../../../@(CATKIN_PACKAGE_BIN_DESTINATION)")
 @[end if]@
 
-set(GENPYI_BIN ${GENPYI_DIR}/run_genpyi.py)
+set(GENPYI_BIN ${GENPYI_DIR}/genpyi)
 
 macro(_generate_genpyi ARG_KIND ARG_PKG ARG_FILE ARG_IFLAGS ARG_MSG_DEPS ARG_GEN_OUTPUT_DIR)
   file(MAKE_DIRECTORY ${ARG_GEN_OUTPUT_DIR})
