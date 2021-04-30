@@ -79,30 +79,33 @@ Examples:
 
 ``genpyi msg`` / ``genpyi srv``:
 
-.. code:: sh 
+.. code:: sh
+    ..
+    Usage: genpyi {msg,srv} [-h] [--out-dir OUT_DIR]
+                            [--include-path INCLUDE_PATH]
+                            package files [files ...]
 
-    Usage: genpyi {msg,srv} [-h]
-       [--out-dir OUT\_DIR] [--include-path INCLUDE\_PATH] package files
-       [files ...]
+    positional arguments:
+      package               Package name of given files
+      files                 Files to generate stubs
 
-    positional arguments: package Package name of given files files Files to
-    generate stubs
-
-    optional arguments: -h, --help show this help message and exit --out-dir
-    OUT\_DIR Output directory. If the option is unset, each stub file will
-    be generated in the same directory as each input. --include-path
-    INCLUDE\_PATH, -I INCLUDE\_PATH Include paths for processing given files
+    optional arguments:
+      -h, --help            show this help message and exit
+      --out-dir OUT_DIR     Output directory. If the option is unset, each stub
+                            file will be generated in the same directory as each
+                            input.
+      --include-path INCLUDE_PATH, -I INCLUDE_PATH
+                            Include paths for processing given files
 
 ``genpyi module``:
 
 .. code:: sh
+    Usage: genpyi module [-h] [--out-dir OUT_DIR] package_dir
 
-    Usage: genpyi module [-h] [--out-dir OUT\_DIR]
-    package\_dir
+    Positional arguments:
+      package_dir        Package directory to create __init__.pyi
 
-    Positional arguments: package\_dir Package directory to create
-    **init**.pyi
-
-    Optional arguments: -h, --help show this help message and exit --out-dir
-    OUT\_DIR Output directory. If the option is unset, **init**.pyi will be
-    generated in the same directory as package\_dir. 
+    Optional arguments:
+      -h, --help         show this help message and exit
+      --out-dir OUT_DIR  Output directory. If the option is unset, __init__.pyi
+                         will be generated in the same directory as package_dir.
