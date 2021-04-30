@@ -27,11 +27,11 @@ build of ``genpyi`` before building your package.
 
 Examples:
 
--  CMakeLists.txt
+- CMakeLists.txt
     .. code:: cmake
 
         find_package(catkin REQUIRED COMPONENTS std_msgs message_generation genpyi)
--  package.xml
+- package.xml
     .. code:: xml
     
         <build_depend>genpyi</build_depend>
