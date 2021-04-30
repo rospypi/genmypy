@@ -33,7 +33,7 @@ Examples:
         find_package(catkin REQUIRED COMPONENTS std_msgs message_generation genpyi)
 - package.xml
     .. code:: xml
-    
+
         <build_depend>genpyi</build_depend>
 
 CLI
