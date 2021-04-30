@@ -80,7 +80,7 @@ Examples:
 ``genpyi msg`` / ``genpyi srv``:
 
 .. code:: sh
-    ..
+
     Usage: genpyi {msg,srv} [-h] [--out-dir OUT_DIR]
                             [--include-path INCLUDE_PATH]
                             package files [files ...]
@@ -100,6 +100,7 @@ Examples:
 ``genpyi module``:
 
 .. code:: sh
+
     Usage: genpyi module [-h] [--out-dir OUT_DIR] package_dir
 
     Positional arguments:
