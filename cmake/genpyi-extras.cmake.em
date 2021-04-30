@@ -6,7 +6,7 @@ set(GENPYI_DIR "@(CMAKE_CURRENT_SOURCE_DIR)/scripts")
 set(GENPYI_DIR "${genpyi_DIR}/../../../@(CATKIN_PACKAGE_BIN_DESTINATION)")
 @[end if]@
 
-set(GENPYI_BIN ${GENPYI_DIR}/run_genpyi.py)
+set(GENPYI_BIN ${GENPYI_DIR}/genpyi)
 
 macro(_generate_genpyi ARG_KIND ARG_PKG ARG_FILE ARG_IFLAGS ARG_MSG_DEPS ARG_GEN_OUTPUT_DIR)
   file(MAKE_DIRECTORY ${ARG_GEN_OUTPUT_DIR})
@@ -44,6 +44,11 @@ macro(_generate_module_pyi ARG_PKG ARG_GEN_OUTPUT_DIR ARG_GENERATED_FILES)
   # place an empty __init__.pyi in the parent folder of msg/srv
   if(NOT EXISTS ${ARG_GEN_OUTPUT_DIR}/__init__.pyi)
     file(WRITE ${ARG_GEN_OUTPUT_DIR}/__init__.pyi "")
+  endif()
+
+  # place py.typed in order to mark this package as PEP561 compatible
+  if(NOT EXISTS ${ARG_GEN_OUTPUT_DIR}/py.typed)
+    file(WRITE ${ARG_GEN_OUTPUT_DIR}/py.typed "")
   endif()
 
   foreach(type "msg" "srv")

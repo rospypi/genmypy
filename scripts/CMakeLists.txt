@@ -1,3 +1,3 @@
 catkin_install_python(
-  PROGRAMS run_genpyi.py
+  PROGRAMS genpyi
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

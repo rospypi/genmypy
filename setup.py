@@ -44,6 +44,6 @@ setup(
             "pysen>=0.9,<0.10",
         ],
     },
-    entry_points={"console_scripts": ["genpyi=genpyi.cli:cli"]},
-    include_package_data=True,
+    package_data={"genpyi": ["py.typed"]},
+    scripts=["scripts/genpyi"],
 )
