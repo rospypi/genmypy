@@ -46,11 +46,6 @@ macro(_generate_module_pyi ARG_PKG ARG_GEN_OUTPUT_DIR ARG_GENERATED_FILES)
     file(WRITE ${ARG_GEN_OUTPUT_DIR}/__init__.pyi "")
   endif()
 
-  # place py.typed in order to mark this package as PEP561 compatible
-  if(NOT EXISTS ${ARG_GEN_OUTPUT_DIR}/py.typed)
-    file(WRITE ${ARG_GEN_OUTPUT_DIR}/py.typed "")
-  endif()
-
   foreach(type "msg" "srv")
     set(GEN_OUTPUT_DIR "${ARG_GEN_OUTPUT_DIR}/${type}")
     set(GEN_OUTPUT_FILE ${GEN_OUTPUT_DIR}/__init__.pyi)
