@@ -27,7 +27,7 @@
   <buildtool_depend condition="$ROS_PYTHON_VERSION == 3">python3-setuptools</buildtool_depend>
 
   <export>
-    <message_generator>pyi</message_generator>
+    <message_generator>mypy</message_generator>
     <architecture_independent/>
   </export>
 </package>
