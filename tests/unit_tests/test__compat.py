@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
-from genpyi._compat import lru_cache
-from genpyi.stub_element import ImportsElement
+from genmypy._compat import lru_cache
+from genmypy.stub_element import ImportsElement
 
 
 def test_lru_cache():

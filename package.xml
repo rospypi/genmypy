@@ -3,7 +3,7 @@
   href="http://download.ros.org/schema/package_format3.xsd"
   schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>genpyi</name>
+  <name>genmypy</name>
   <version>0.2.0</version>
   <description>
     Python stub generator from genmsg specs
@@ -12,9 +12,9 @@
   <maintainer email="otamachan@gmail.com">Tamaki Nishino</maintainer>
   <license>Apache License, Version 2.0</license>
 
-  <url type="website">https://github.com/rospypi/genpyi</url>
-  <url type="bugtracker">https://github.com/rospypi/genpyi/issues</url>
-  <url type="repository">https://github.com/rospypi/genpyi</url>
+  <url type="website">https://github.com/rospypi/genmypy</url>
+  <url type="bugtracker">https://github.com/rospypi/genmypy/issues</url>
+  <url type="repository">https://github.com/rospypi/genmypy</url>
 
   <author>Yuki Igarashi</author>
   <author>Tamaki Nishino</author>

@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="genpyi",
+    name="genmypy",
     version="0.2.0",
     packages=find_packages(exclude=["tests"]),
     description="A Python stub generator from genmsg specs",
@@ -22,7 +22,7 @@ setup(
         "Programming Language :: Python",
     ],
     license="Apache License 2.0",
-    url="https://github.com/rospypi/genpyi/",
+    url="https://github.com/rospypi/genmypy",
     install_requires=[
         "genmsg",
         "genpy",
@@ -43,6 +43,6 @@ setup(
             "pysen>=0.9,<0.10",
         ],
     },
-    package_data={"genpyi": ["py.typed"]},
-    scripts=["scripts/genpyi"],
+    package_data={"genmypy": ["py.typed"]},
+    scripts=["scripts/genmypy"],
 )

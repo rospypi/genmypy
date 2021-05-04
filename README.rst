@@ -1,6 +1,6 @@
-======
-genpyi
-======
+=======
+genmypy
+=======
 
 A Python stub generator from genmsg specs
 
@@ -9,7 +9,7 @@ Installation
 
 .. code:: sh
 
-    pip install genpyi
+    pip install genmypy
 
 Usage
 =====
@@ -17,32 +17,32 @@ Usage
 catkin
 ------
 
-Add ``genpyi`` along with ``message_generation`` to ``find_package`` in
-CMakeLists.txt. ``genmsg`` will find ``genpyi`` automatically when
+Add ``genmypy`` along with ``message_generation`` to ``find_package`` in
+CMakeLists.txt. ``genmsg`` will find ``genmypy`` automatically when
 building msg/srv files.
 
 Also, keep in mind that your package should have the build dependency
-for ``genpyi`` in ``package.xml`` to make sure that catkin finishes the
-build of ``genpyi`` before building your package.
+for ``genmypy`` in ``package.xml`` to make sure that catkin finishes the
+build of ``genmypy`` before building your package.
 
 Examples:
 
 - CMakeLists.txt
     .. code:: cmake
 
-        find_package(catkin REQUIRED COMPONENTS std_msgs message_generation genpyi)
+        find_package(catkin REQUIRED COMPONENTS std_msgs message_generation genmypy)
 - package.xml
     .. code:: xml
 
-        <build_depend>genpyi</build_depend>
+        <build_depend>genmypy</build_depend>
 
 CLI
 ---
 
 ::
 
-    $ genpyi --help
-    Usage: genpyi [-h] {msg,srv,module} ...
+    $ genmypy --help
+    Usage: genmypy [-h] {msg,srv,module} ...
     positional arguments:
       {msg,srv,module}
         msg             Generate stub files from .msg files
@@ -58,30 +58,30 @@ Examples:
 .. code:: sh
 
     # Message files
-    $ genpyi msg custom_msgs custom_msgs/msg/Custom.msg
-    $ genpyi msg std_msgs --out-dir out /opt/ros/melodic/share/std_msgs/msg/Header.msg
-    $ genpyi msg sensor_msgs --out-dir out \
+    $ genmypy msg custom_msgs custom_msgs/msg/Custom.msg
+    $ genmypy msg std_msgs --out-dir out /opt/ros/melodic/share/std_msgs/msg/Header.msg
+    $ genmypy msg sensor_msgs --out-dir out \
         -Istd_msgs:/opt/ros/melodic/share/std_msgs/msg \
         -Isensor_msgs:/opt/ros/melodic/share/sensor_msgs/msg \
         /opt/ros/melodic/share/sensor_msgs/msg/PointCloud2.msg
 
     # Service files
-    $ genpyi srv custom_msgs custom_msgs/srv/Custom.msg
-    $ genpyi srv nav_msgs --out-dir out \
+    $ genmypy srv custom_msgs custom_msgs/srv/Custom.msg
+    $ genmypy srv nav_msgs --out-dir out \
         -Istd_msgs:/opt/ros/melodic/share/std_msgs/msg \
         -Isensor_msgs:/opt/ros/melodic/share/sensor_msgs/msg \
         /opt/ros/melodic/share/sensor_msgs/srv/SetCameraInfo.srv
 
     # Module files
-    $ genpyi module custom_msgs/msg
-    $ genpyi module --module-finder py --out out \
+    $ genmypy module custom_msgs/msg
+    $ genmypy module --module-finder py --out out \
         /opt/ros/melodic/lib/python2.7/dist-packages/std_msgs/msg/
 
-``genpyi msg`` / ``genpyi srv``:
+``genmypy msg`` / ``genmypy srv``:
 
 .. code:: sh
 
-    Usage: genpyi {msg,srv} [-h] [--out-dir OUT_DIR]
+    Usage: genmypy {msg,srv} [-h] [--out-dir OUT_DIR]
                             [--include-path INCLUDE_PATH]
                             package files [files ...]
 
@@ -97,11 +97,11 @@ Examples:
       --include-path INCLUDE_PATH, -I INCLUDE_PATH
                             Include paths for processing given files
 
-``genpyi module``:
+``genmypy module``:
 
 .. code:: sh
 
-    Usage: genpyi module [-h] [--out-dir OUT_DIR] package_dir
+    Usage: genmypy module [-h] [--out-dir OUT_DIR] package_dir
 
     Positional arguments:
       package_dir        Package directory to create __init__.pyi

@@ -151,7 +151,7 @@ def _setup_msg_srv_options(parser, handler):
 
 def cli():
     # type: (...) -> None
-    prog = "genpyi"
+    prog = "genmypy"
     parser = argparse.ArgumentParser(
         prog,
         description="""Generate python stub files from genmsg specs

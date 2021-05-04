@@ -1,7 +1,7 @@
 import os
 from typing import Dict, List
 
-from genpyi import cli
+from genmypy import cli
 
 from .utils import assert_output_equals, message_path, temporary_directory
 
