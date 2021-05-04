@@ -1,4 +1,4 @@
 include LICENSE
 include README.rst
 
-recursive-include genpyi *.py py.typed
+recursive-include genmypy *.py py.typed

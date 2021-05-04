@@ -1,6 +1,6 @@
 import os
 
-from genpyi import cli
+from genmypy import cli
 
 from .utils import assert_output_equals, message_path, service_path, temporary_directory
 
