@@ -39,6 +39,7 @@ jobs:
       run: |
           # actions/checkout@v2 requires git>=2.18, which is available in noetic-ros-core (focal)
           # So we don't need to use ppa
+          apt-get update -y
           apt-get install -y --no-install-recommends git
     - uses: actions/checkout@v2
     - name: Set up Python
