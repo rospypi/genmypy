@@ -160,12 +160,12 @@ def convert_message_class(first_party_package, spec, imports):
     # Add public methods
     msgclass.add(
         ClassMethodElement(
-            "serialize", "None", [ParameterElement("buff", "typing.StringIO")]
+            "serialize", "None", [ParameterElement("buff", "typing.BinaryIO")]
         )
     )
     msgclass.add(
         ClassMethodElement(
-            "deserialize", spec.short_name, [ParameterElement("str", "str")]
+            "deserialize", spec.short_name, [ParameterElement("str", "bytes")]
         )
     )
     msgclass.add(
@@ -173,7 +173,7 @@ def convert_message_class(first_party_package, spec, imports):
             "serialize_numpy",
             "None",
             [
-                ParameterElement("buff", "typing.StringIO"),
+                ParameterElement("buff", "typing.BinaryIO"),
                 ParameterElement("numpy", "types.ModuleType"),
             ],
         )
@@ -183,7 +183,7 @@ def convert_message_class(first_party_package, spec, imports):
             "deserialize_numpy",
             spec.short_name,
             [
-                ParameterElement("str", "str"),
+                ParameterElement("str", "bytes"),
                 ParameterElement("numpy", "types.ModuleType"),
             ],
         )
