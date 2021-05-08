@@ -6,6 +6,7 @@ from genpy.generator import compute_pkg_type
 from ._compat import lru_cache
 from ._typing import TYPE_CHECKING
 from .stub_element import (
+    AliasElement,
     ClassElement,
     ClassMethodElement,
     CommentElement,
@@ -191,13 +192,13 @@ def convert_message_class(first_party_package, spec, imports):
     return msgclass
 
 
-def convert_service_class(spec):
-    # type: (SrvSpec) -> ClassElement
+def convert_service_class(spec, request_class, response_class):
+    # type: (SrvSpec, ClassElement, ClassElement) -> ClassElement
     srvclass = ClassElement(spec.short_name, "object")
     srvclass.add(FieldElement("_type", "str"))
     srvclass.add(FieldElement("_md5sum", "str"))
-    srvclass.add(FieldElement("_request_class", "str"))
-    srvclass.add(FieldElement("_response_class", "str"))
+    srvclass.add(AliasElement("_request_class", request_class.name))
+    srvclass.add(AliasElement("_response_class", response_class.name))
 
     return srvclass
 

@@ -55,5 +55,5 @@ class SetCameraInfoResponse(genpy.Message):
 class SetCameraInfo(object):
     _type: str
     _md5sum: str
-    _request_class: str
-    _response_class: str
+    _request_class = SetCameraInfoRequest
+    _response_class = SetCameraInfoResponse
