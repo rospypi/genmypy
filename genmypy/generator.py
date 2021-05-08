@@ -53,7 +53,9 @@ def generate_service_stub(package, spec):
     module.add_element(EmptyLinesElement())
     module.add_element(message_classes[1])  # response class
     module.add_element(EmptyLinesElement())
-    module.add_element(convert_service_class(spec))  # service class
+    module.add_element(
+        convert_service_class(spec, message_classes[0], message_classes[1])
+    )  # service class
 
     for line in module.generate():
         yield line

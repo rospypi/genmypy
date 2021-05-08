@@ -51,5 +51,5 @@ class SetMapResponse(genpy.Message):
 class SetMap(object):
     _type: str
     _md5sum: str
-    _request_class: str
-    _response_class: str
+    _request_class = SetMapRequest
+    _response_class = SetMapResponse

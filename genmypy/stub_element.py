@@ -152,6 +152,17 @@ class FieldElement(StatementElementBase):
         yield _format("{}: {}".format(self.name, self.type), indent)
 
 
+class AliasElement(StatementElementBase):
+    def __init__(self, name, alias):
+        # type: (str, str) -> None
+        self.name = name
+        self.alias = alias
+
+    def generate(self, indent):
+        # type: (int) -> Iterator[str]
+        yield _format("{} = {}".format(self.name, self.alias), indent)
+
+
 class FunctionElement(StatementElementBase):
     def __init__(self, name, return_type, params=None):
         # type: (str, str, Optional[Sequence[ParameterElement]]) -> None
