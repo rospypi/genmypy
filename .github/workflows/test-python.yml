@@ -16,7 +16,7 @@ jobs:
     name: py27
     runs-on: ubuntu-latest
     container:
-      image: ros:noetic-ros-core
+      image: ros:noetic-ros-core-buster
     steps:
     - uses: actions/checkout@v2
     - name: Set up apt
@@ -33,7 +33,7 @@ jobs:
     name: py37
     runs-on: ubuntu-latest
     container:
-      image: ros:noetic-ros-core
+      image: ros:noetic-ros-core-buster
     steps:
     - name: Set up apt
       run: |
