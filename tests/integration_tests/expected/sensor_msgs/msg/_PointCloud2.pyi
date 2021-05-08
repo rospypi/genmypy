@@ -21,7 +21,7 @@ class PointCloud2(genpy.Message):
     is_bigendian: bool
     point_step: int
     row_step: int
-    data: typing.List[int]
+    data: bytes
     is_dense: bool
 
     def __init__(
@@ -33,7 +33,7 @@ class PointCloud2(genpy.Message):
         is_bigendian: bool = ...,
         point_step: int = ...,
         row_step: int = ...,
-        data: typing.List[int] = ...,
+        data: bytes = ...,
         is_dense: bool = ...,
         *args: typing.Any,
         **kwds: typing.Any,
