@@ -19,9 +19,16 @@ jobs:
       image: ros:noetic-ros-core-buster
     steps:
     - uses: actions/checkout@v2
-    - name: Set up apt
+    - name: Set up ROS
       run: |
           apt-get update -y
+          apt-get install -y --no-install-recommends \
+            ros-noetic-genmsg \
+            ros-noetic-genpy \
+            ros-noetic-geometry-msgs \
+            ros-noetic-nav-msgs \
+            ros-noetic-sensor-msgs \
+            ros-noetic-std-msgs
     - name: Set up Python
       run: |
           apt-get install -y --no-install-recommends python-setuptools python-pip
@@ -42,6 +49,13 @@ jobs:
           apt-get update -y
           apt-get install -y --no-install-recommends git
     - uses: actions/checkout@v2
+    - name: Set up ROS
+      run: |
+          apt-get install -y --no-install-recommends \
+            ros-noetic-geometry-msgs \
+            ros-noetic-nav-msgs \
+            ros-noetic-sensor-msgs \
+            ros-noetic-std-msgs
     - name: Set up Python
       run: |
           apt-get install -y --no-install-recommends \
