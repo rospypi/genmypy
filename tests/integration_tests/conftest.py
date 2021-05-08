@@ -8,13 +8,13 @@ INTEGRATION_TEST_DIR = os.path.abspath(os.path.join(__file__, os.pardir))
 @pytest.fixture
 def ros_share_directory():
     # type: () -> str
-    return "/opt/ros/melodic/share/"
+    return "/opt/ros/noetic/share/"
 
 
 @pytest.fixture
 def ros_python_library_directory():
     # type: () -> str
-    return "/opt/ros/melodic/lib/python2.7/dist-packages/"
+    return "/opt/ros/noetic/lib/python2.7/dist-packages/"
 
 
 @pytest.fixture
