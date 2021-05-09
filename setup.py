@@ -35,7 +35,7 @@ setup(
         ],
         # NOTE: We don't support python2 for the lint environment
         "lint": [
-            "black==21.5b0",
+            "black==20.8b1",
             "flake8-bugbear==21.4.3",
             "flake8==3.9.1",
             "isort==5.1.4",
