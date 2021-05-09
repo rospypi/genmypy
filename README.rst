@@ -7,6 +7,16 @@ A Python stub generator from genmsg specs
 Installation
 ============
 
+If you use catkin and need CMake support for the ``genmypy`` generator, clone the repository and add it to your catkin workspace.
+
+.. code:: sh
+
+    cd /path/to/your/ws
+    git clone https://github.com/rospypi/genmypy.git
+
+
+If you don't need the cmake support, you can also install it from `pypi.org <https://pypi.org/>`_:
+
 .. code:: sh
 
     pip install genmypy
