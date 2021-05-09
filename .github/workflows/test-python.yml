@@ -16,22 +16,15 @@ jobs:
     name: py27
     runs-on: ubuntu-latest
     container:
-      image: ros:noetic-ros-core-buster
+      image: ros:melodic-ros-core
     steps:
     - uses: actions/checkout@v2
-    - name: Set up ROS
+    - name: Set up apt
       run: |
           apt-get update -y
-          apt-get install -y --no-install-recommends \
-            ros-noetic-genmsg \
-            ros-noetic-genpy \
-            ros-noetic-geometry-msgs \
-            ros-noetic-nav-msgs \
-            ros-noetic-sensor-msgs \
-            ros-noetic-std-msgs
     - name: Set up Python
       run: |
-          apt-get install -y --no-install-recommends python-setuptools python-pip
+          apt-get install -y --no-install-recommends python-pip
           pip install tox==${{ env.TOX_VERSION }}
     - name: Run pytest
       run: |
