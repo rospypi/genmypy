@@ -19,7 +19,7 @@ class Image(genpy.Message):
     encoding: str
     is_bigendian: int
     step: int
-    data: typing.List[int]
+    data: bytes
 
     def __init__(
         self,
@@ -29,7 +29,7 @@ class Image(genpy.Message):
         encoding: str = ...,
         is_bigendian: int = ...,
         step: int = ...,
-        data: typing.List[int] = ...,
+        data: bytes = ...,
         *args: typing.Any,
         **kwds: typing.Any,
     ) -> None: ...

@@ -64,6 +64,11 @@ def _get_genmsg_type(first_party_package, field_type, imports):
         base_field_type, is_array, array_len = genmsg.msgs.parse_type(field_type)
         assert is_array
         # TODO: Handle array_len (use typing.Annotated?)
+
+        if base_field_type == "uint8":
+            # Special case for uint8[]
+            return "bytes"
+
         base_type = _get_genmsg_type(first_party_package, base_field_type, imports)
         return "typing.List[{}]".format(base_type)
 
