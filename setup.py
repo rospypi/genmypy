@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="genmypy",
-    version="0.3.0",
+    version="0.3.1",
     packages=find_packages(exclude=["tests"]),
     description="A Python stub generator from genmsg specs",
     long_description=open("README.rst").read(),
