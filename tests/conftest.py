@@ -14,8 +14,8 @@ def pytest_addoption(parser):
     )
     parser.addoption(
         "--python-version",
-        help="Python version to use for finding libraries",
-        default="3.8",
+        help="Python version for finding ROS libraries",
+        default="3",
     )
 
 
