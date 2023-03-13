@@ -42,6 +42,10 @@ jobs:
           apt-get update -y
           apt-get install -y --no-install-recommends git
     - uses: actions/checkout@v2
+    - name: Set up repository
+      run: |
+          chown -R $(id -u) .
+      shell: bash
     - name: Set up ROS
       run: |
           apt-get install -y --no-install-recommends \

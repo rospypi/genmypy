@@ -36,11 +36,15 @@ setup(
         # NOTE: We don't support python2 for the lint environment
         "lint": [
             "black==20.8b1",
+            # NOTE: We need to support py27 and newer black does not support py27.
+            # Limit the click version to use older black.
+            # See: https://github.com/psf/black/issues/2964 for more details.
+            "click<8.1.0",
             "flake8-bugbear==21.4.3",
             "flake8==3.9.1",
             "isort==5.1.4",
             "mypy==0.790",
-            "pysen>=0.9,<0.10",
+            "pysen>=0.10,<0.11",
         ],
     },
     package_data={"genmypy": ["py.typed"]},
