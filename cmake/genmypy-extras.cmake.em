@@ -57,7 +57,7 @@ macro(_generate_module_mypy ARG_PKG ARG_GEN_OUTPUT_DIR ARG_GENERATED_FILES)
 
     if(IS_DIRECTORY ${GEN_OUTPUT_DIR})
       add_custom_command(OUTPUT ${GEN_OUTPUT_FILE}
-        DEPENDS ${GENMYPY_BIN}
+        DEPENDS ${GENMYPY_BIN} ${ARG_PKG}_generate_messages_py
         COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMYPY_BIN} module
           --module-finder py
           --out-dir ${GEN_OUTPUT_DIR}
