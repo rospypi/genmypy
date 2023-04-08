@@ -2,6 +2,11 @@
 Changelog for package genmypy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.3.2 (2023-04-08)
+------------------
+* Need genpy init file to be generated before generating mypy module init file (`#45 <https://github.com/rospypi/genmypy/issues/45>`_, thanks @mikaelarguedas!)
+* Upgrade dev dependencies (`#46 <https://github.com/rospypi/genmypy/issues/46>`_)
+
 0.3.1 (2021-05-09)
 ------------------
 * Use bytes for uint8[] field (`#40 <https://github.com/rospypi/genmypy/issues/40>`_)
